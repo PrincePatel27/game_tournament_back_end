@@ -10,8 +10,11 @@ app.use(express.static("static"));
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
-// Get the models
+// Get the game models
 const { Game } = require("./models/game");
+
+// Get the game models
+const { Tournament } = require("./models/tournament");
 
 // Create a route for root - /
 app.get("/", function(req, res) {
@@ -42,6 +45,24 @@ app.get("/games1", function(req, res) {
 app.get("/point_table", function(req, res) {
     // Assumes a table called test_table exists in your database
     sql = 'select * from tournamentleaderboard';
+    db.query(sql).then(results => {
+        console.log(results);
+        res.send(results)
+    });
+});
+
+// Create a route for testing the databse of games
+app.get("/tournament_table", function(req, res) {
+    var tournament=new Tournament();
+    tournament.getTournamentName().then( 
+        Promise => {
+        res.send(tournament);
+    });
+});
+// Create a route for testing the databse of games
+app.get("/tournament", function(req, res) {
+    // Assumes a table called test_table exists in your database
+    sql = 'select name,description,time date, venue ,status from tournaments';
     db.query(sql).then(results => {
         console.log(results);
         res.send(results)
