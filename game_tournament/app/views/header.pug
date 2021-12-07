@@ -9,21 +9,18 @@ head
 #wrapper.d-flex
   // Sidebar
   #sidebar-wrapper.border-end.bg-white
-    .sidebar-heading.border-bottom.bg-light GAME TOURNAMENT
+    button#sidebarToggle.btn.btn-primary MENU
+        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
     .list-group.list-group-flush
-      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='header') Dashboard
-      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='games!') GAMES
-      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') MATCHES
-      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') SCOREBOARD
-      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') MY ACCOUNT
+      for game in games
+        a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') #{game.name}
       a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') LOGOUT
   // Page content wrapper
   #page-content-wrapper
     // Top navigation
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
       .container-fluid
-        button#sidebarToggle.btn.btn-primary MENU
-        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+        
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.ms-auto.mt-2.mt-lg-0
             li.nav-item.active
@@ -35,4 +32,9 @@ head
             li.nav-item.active
               a.nav-link(href='login') Login
                 // Page content
+    
+            li.nav-item.dropdown
+              a#navbarDropdown.nav-link.dropdown-toggle(role='button' href='#' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false') PROFILE
+            .container-fluid
+            
     block content 

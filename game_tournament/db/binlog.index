@@ -8,3 +8,8 @@
 ./binlog.000008
 ./binlog.000009
 ./binlog.000010
+<<<<<<< HEAD
+=======
+./binlog.000011
+./binlog.000012
+>>>>>>> 2a8a2336a74508b1c31a8c6b26e514e2f0e790bd

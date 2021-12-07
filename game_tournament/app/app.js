@@ -19,10 +19,16 @@ const { Game } = require("./models/game");
 // Get the game models
 const { Tournament } = require("./models/tournament");
 const { Teampoint } = require("./models/teampoint");
-
+const {TournamentTeams} = require("./models/tournamentTeams")
 // Create a route for root - /
-app.get("/", function(req, res) {
-    res.render("index");
+app.get("/", async function(req, res) {
+    const game = new Game();
+    var tournament=new Tournament();
+    const tournaments = await tournament.getTournamentName();
+    const games = await game.getGameName();
+    const tournamentLeaderboard = await tournament.getTournamentTables();
+    console.log(tournamentLeaderboard.length)
+    res.render("index",{games,tournaments,tournamentLeaderboard});
 
 });
 app.get("/Home", function(req, res) {
@@ -53,12 +59,7 @@ app.get("/Forgot", function(req, res) {
 
 });
 // Create a route for testing the databse of games
-app.get("/game_table", function(req, res) {
-    var game=new Game();
-    game.getGameName().then( 
-        Promise => {
-        res.send(game);
-    });
+app.get("/game_table", async function(req, res) {
 });
 
 // Create a route for testing the databse of games
@@ -98,6 +99,14 @@ app.get("/tournament_table", function(req, res) {
     tournament.getTournamentName().then( 
         Promise => {
         res.send(tournament);
+    });
+});
+app.get("/tournament_matches", function(req, res) {
+    console.log(req.query.id)
+    var tournamentTeams=new TournamentTeams();
+    tournamentTeams.getTournamentMatches(req.query.id).then( 
+        Promise => {
+        res.send(tournamentTeams);
     });
 });
 // Create a route for testing the databse of games
