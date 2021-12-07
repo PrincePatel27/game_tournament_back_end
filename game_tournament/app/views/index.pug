@@ -1,16 +1,52 @@
 extend header 
 block content 
     .container-fluid
-      table(style='border-collapse: collapse; width: 100%; height: 36px;' border='1')
-        tbody
-          tr(style='height: 18px;')
-            td(style='width: 10.3333%; height: 18px;') Tournament
-            td(style='width: 10.33%; height: 18px;') Matches
-            td(style='width: 10.33%; height: 18px;') Point Table
-          tr(style='height: 18px;')
-            td(style='width: 33.3333%; height: 18px;') &nbsp;
-            td(style='width: 33.3333%; height: 18px;') &nbsp;
-            td(style='width: 33.3333%; height: 18px;') &nbsp;
-            // Bootstrap core JS
-            p &nbsp;
-            // Core theme JS
+      .row.mt-2 
+        .col-md-12 
+         ul.nav.nav-tabs
+            li.nav-item
+              a.nav-link.active(href='#') Tournament
+            li.nav-item
+              a.nav-link(href='#') Matches
+            li.nav-item
+              a.nav-link(href='#') Point Table
+      .row.p-2 
+        table.table
+          thead
+            tr
+              th(scope='col') #
+              th(scope='col') Name
+              th(scope='col') Game
+              th(scope='col') Date
+              th(scope='col') Time 
+              th(scope='col') Mode  
+              th(scope='col') Venue   
+          tbody
+            for tournament in tournaments
+              tr
+                th(scope='row') #{tournament.id}
+                td #{tournament.name}
+                td #{tournament.gameName}
+                td #{tournament.date}
+                td #{tournament.time}
+                td #{tournament.status}
+                td #{tournament.venue}
+      for tr in tournamentLeaderboard
+        .row.p-2
+          h4 #{tr.name}
+          if tr.leaderBoard.length > 0
+            table.table
+              thead
+                tr
+                  th(scope='col') #
+                  th(scope='col') Team Name
+                  th(scope='col') Points
+              tbody
+                for ld in tr.leaderBoard
+                  tr
+                    th(scope='row') #{ld.id}
+                    td #{ld.teamName}
+                    td #{ld.point}
+          else 
+            p No tournament found  
+

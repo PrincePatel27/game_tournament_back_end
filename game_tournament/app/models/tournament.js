@@ -21,11 +21,27 @@ class Tournament {
         this.name = name;
     }
     async getTournamentName() {
-        if (typeof this.name !== 'string') {
-            var sql = "SELECT name,description,time date, venue ,status from tournaments";
-            const results = await db.query(sql);
-            this.name = results;          
+        var sql = `SELECT t.*,g.name as gameName from tournaments t
+        LEFT JOIN games g ON g.id = t.gameId`;
+        const results = await db.query(sql);
+        return results;
+    }
+
+    async getTournamentTables() {
+        var sql = `SELECT * FROM tournaments`;
+        const results = await db.query(sql);
+        if(results.length > 0) {
+            for (const tr of results) {
+                tr.leaderBoard = await this.getTournamentLeaderboard(tr.id);
+            }
         }
+        return results;
+    }
+
+    async getTournamentLeaderboard(id) {
+        var sql = `SELECT tl.*,tt.name as teamName from  tournamentleaderboard tl
+        LEFT JOIN tournamentteams tt ON tt.id = tl.teamId WHERE tl.tournamentId = ${id}`;
+        return await db.query(sql);
     }
 }
 module.exports = {
