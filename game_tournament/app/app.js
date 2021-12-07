@@ -19,7 +19,7 @@ const { Game } = require("./models/game");
 // Get the game models
 const { Tournament } = require("./models/tournament");
 const { Teampoint } = require("./models/teampoint");
-
+const {TournamentTeams} = require("./models/tournamentTeams")
 // Create a route for root - /
 app.get("/", function(req, res) {
     res.render("index");
@@ -72,6 +72,14 @@ app.get("/tournament_table", function(req, res) {
     tournament.getTournamentName().then( 
         Promise => {
         res.send(tournament);
+    });
+});
+app.get("/tournament_matches", function(req, res) {
+    console.log(req.query.id)
+    var tournamentTeams=new TournamentTeams();
+    tournamentTeams.getTournamentMatches(req.query.id).then( 
+        Promise => {
+        res.send(tournamentTeams);
     });
 });
 // Create a route for testing the databse of games
