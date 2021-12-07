@@ -15,6 +15,7 @@ const { Game } = require("./models/game");
 
 // Get the game models
 const { Tournament } = require("./models/tournament");
+const { Teampoint } = require("./models/teampoint");
 
 // Create a route for root - /
 app.get("/", function(req, res) {
@@ -41,8 +42,8 @@ app.get("/games1", function(req, res) {
     });
 });
 
-// Create a route for testing the databse of games
-app.get("/point_table", function(req, res) {
+// Create a route for testing the databse of 
+app.get("/points", function(req, res) {
     // Assumes a table called test_table exists in your database
     sql = 'select * from tournamentleaderboard';
     db.query(sql).then(results => {
@@ -50,6 +51,17 @@ app.get("/point_table", function(req, res) {
         res.send(results)
     });
 });
+
+//Create a route for testing the databse of games
+app.get("/point_table", function(req, res) {
+    var point=new Teampoint();
+    point.getTeampointID().then( 
+        Promise => {
+        res.send(point);
+    });
+});
+
+
 
 // Create a route for testing the databse of games
 app.get("/tournament_table", function(req, res) {
@@ -68,6 +80,8 @@ app.get("/tournament", function(req, res) {
         res.send(results)
     });
 });
+
+
 
 
 // Create a route for /goodbye
