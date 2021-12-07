@@ -9,12 +9,11 @@ class Game {
     constructor(name) {
         this.name = name;
     }
+
     async getGameName() {
-        if (typeof this.name !== 'string') {
-            var sql = "SELECT name from games";
-            const results = await db.query(sql);
-            this.name = results;          
-        }
+        var sql = "SELECT * from games";
+        const results = await db.query(sql);
+        return results;
     }
 }
 module.exports = {

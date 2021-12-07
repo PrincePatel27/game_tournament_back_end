@@ -21,18 +21,19 @@ const { Tournament } = require("./models/tournament");
 const { Teampoint } = require("./models/teampoint");
 
 // Create a route for root - /
-app.get("/", function(req, res) {
-    res.render("index");
+app.get("/", async function(req, res) {
+    const game = new Game();
+    var tournament=new Tournament();
+    const tournaments = await tournament.getTournamentName();
+    const games = await game.getGameName();
+    const tournamentLeaderboard = await tournament.getTournamentTables();
+    console.log(tournamentLeaderboard.length)
+    res.render("index",{games,tournaments,tournamentLeaderboard});
 
 });
 
 // Create a route for testing the databse of games
-app.get("/game_table", function(req, res) {
-    var game=new Game();
-    game.getGameName().then( 
-        Promise => {
-        res.send(game);
-    });
+app.get("/game_table", async function(req, res) {
 });
 
 // Create a route for testing the databse of games
