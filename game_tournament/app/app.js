@@ -25,7 +25,33 @@ app.get("/", function(req, res) {
     res.render("index");
 
 });
+app.get("/Home", function(req, res) {
+    res.render("index");
 
+});
+
+app.get("/Profile", function(req, res) {
+    res.render("Profile");
+
+});
+
+app.get("/header", function(req, res) {
+    res.render("header");
+
+});
+app.get("/signup", function(req, res) {
+    res.render("signup");
+
+});
+app.get("/login", function(req, res) {
+    res.render("login");
+
+});
+
+app.get("/Forgot", function(req, res) {
+    res.render("Forgot");
+
+});
 // Create a route for testing the databse of games
 app.get("/game_table", function(req, res) {
     var game=new Game();

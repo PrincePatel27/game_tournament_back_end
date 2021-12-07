@@ -11,8 +11,8 @@ head
   #sidebar-wrapper.border-end.bg-white
     .sidebar-heading.border-bottom.bg-light GAME TOURNAMENT
     .list-group.list-group-flush
-      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') Dashboard
-      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') GAMES
+      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='header') Dashboard
+      a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='games!') GAMES
       a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') MATCHES
       a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') SCOREBOARD
       a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') MY ACCOUNT
@@ -27,18 +27,12 @@ head
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.ms-auto.mt-2.mt-lg-0
             li.nav-item.active
-              a.nav-link(href='#!') Home
-            li.nav-item
-              a.nav-link(href='#!') SHOW MATCHES
-            li.nav-item.dropdown
-              a#navbarDropdown.nav-link.dropdown-toggle(role='button' href='#' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false') TOURNAMENT
-              .dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
-                a.dropdown-item(href='#!') LIVE TOURNAMENT
-                a.dropdown-item(href='#!') UPCOMING TOURNAMENT
-            li.nav-item.dropdown
-              a#navbarDropdown.nav-link.dropdown-toggle(role='button' href='#' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false') POINT TABLE
-            .container-fluid
-              button#sidebarToggle.btn.btn-primary GAME
-              button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+              a.nav-link(href='Home') Home
+            li.nav-item.active
+              a.nav-link(href='Profile') Profile 
+            li.nav-item.active
+              a.nav-link(href='signup') Signup
+            li.nav-item.active
+              a.nav-link(href='login') Login
                 // Page content
     block content 
