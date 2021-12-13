@@ -24,10 +24,9 @@ const {TournamentTeams} = require("./models/tournamentTeams")
 app.get("/", async function(req, res) {
     const game = new Game();
     var tournament=new Tournament();
-    const tournaments = await tournament.getTournamentName();
-    const games = await game.getGameName();
-    const tournamentLeaderboard = await tournament.getTournamentTables();
-    console.log(tournamentLeaderboard.length)
+    const tournaments = [];
+    const games = [];
+    const tournamentLeaderboard = [];
     res.render("index",{games,tournaments,tournamentLeaderboard});
 
 });
