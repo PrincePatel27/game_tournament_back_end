@@ -15,8 +15,8 @@ head
     button#sidebarToggle.btn.btn-primary MENU
         button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
     .list-group.list-group-flush
-      for game in games
-        a.list-group-item.list-group-item-action.list-group-item-light.p-3(href='#!') #{game.name}
+      
+
   // Page content wrapper
   #page-content-wrapper
     // Top navigation 
@@ -30,13 +30,16 @@ head
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
           ul.navbar-nav.mr-auto.mt-2.mt-lg-0
             li.nav-item.active
-              a.nav-link(href='#Home') Home 
-              span.sr-only (current)
+              a.nav-link(href='Home') Home  
+            li.nav-item.active
+              a.nav-link(href='Login') Signin
+            li.nav-item.active
+              a.nav-link(href='Signup') Signup
             li.nav-item.dropdown
-              a#navbarDropdown.nav-link.dropdown-toggle(href='#Profile' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Profile
+              a#navbarDropdown.nav-link.dropdown-toggle(href='#Profile' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Username
               .dropdown-menu(aria-labelledby='navbarDropdown')
-                a.dropdown-item(href='#') Settings
-                a.dropdown-item(href='#') Logout
+                a.dropdown-item(href="profile") Profile
+                a.dropdown-item(href='login') Logout
                 
            
     block content 
