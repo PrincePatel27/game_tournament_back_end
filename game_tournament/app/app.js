@@ -31,6 +31,23 @@ app.get("/", async function(req, res) {
     res.render("index",{games,tournaments,tournamentLeaderboard});
 
 });
+app.get("/Home", function(req, res) {
+    res.render("index");
+
+});
+app.get("/Profile", function(req, res) {
+    res.render("profile");
+});
+app.get("/Signup", function(req, res) {
+    res.render("signup");
+});
+app.get("/Login", function(req, res) {
+    res.render("login");
+});
+
+app.get("/Forgot", function(req, res) {
+    res.render("forget");
+});
 
 // Create a route for testing the databse of games
 app.get("/game_table", async function(req, res) {

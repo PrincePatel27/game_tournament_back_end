@@ -1,0 +1,32 @@
+extend header 
+block content 
+    .container-fluid.m-4
+    .row.ml-4   
+        h3 Ceate account
+    form.mb-2.ml-4
+        .form-group
+        label Username
+        br
+        input.fw(type='text' aria-describedby='emailHelp' placeholder='Enter Username')
+        .form-group
+        label Email address 
+        br
+        input.fw(type='email' placeholder='Enter Email')
+        br
+        .form-group
+        label Date of birth 
+        br
+        input.fw(type='Date' placeholder='Enter DOB')
+        br
+        .form-group
+        label Password 
+        br
+        input.fw(type='Password' placeholder='Enter Password')
+        br
+        .form-group
+        label Confirm Password 
+        br
+        input.fw(type='Password' placeholder='Enter Password')
+        br 
+        .form-group
+        button.btn.btn-primary.fw(type='submit') Submit  

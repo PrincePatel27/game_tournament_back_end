@@ -1,0 +1,23 @@
+extend header 
+block content 
+    .container-fluid.m-4
+    .row.ml-4   
+        h3 Profile 
+    form.mb-2.ml-4
+        .form-group
+        label Username
+        br
+        input.fw(type='text' aria-describedby='emailHelp' placeholder='Dhruvesh123')
+        .form-group
+        label Email address 
+        br
+        input.fw(type='email' placeholder='Dhruvesh207@gmail.com')
+        br
+        .form-group
+        label Date of birth 
+        br
+        input.fw(type='text' placeholder='30/12/1997')
+        br
+        .form-group
+        button.btn.btn-primary.fw(type='submit') Update 
+        a.nav-link(href='Forgot') Change Password  
