@@ -10,6 +10,7 @@ block content
               a.nav-link(href='#Matches') Matches
             li.nav-item
               a.nav-link(href='#Pointtable') Point Table
+              
     .tab-content
         #Tournament.container.tan-pane.fade.show.active
           table.table
@@ -32,10 +33,22 @@ block content
                   td #{tournament.time}
                   td #{tournament.status}
                   td #{tournament.venue}
+        
         #Matches.container.tab-pane.fade
           h3 Menu 1
           p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         #Pointtable.container.tab-pane.fade
+          .row
+          .col-sm-6
+            .form-group
+              label.control-label.requiredField(for='propertyType') Select Game
+                span.asteriskField *
+              .col-xs-12
+                select#propertyType.select.form-control.input-lg(form='addProperty', name='propertyType')
+                  option(value='0') --Select --
+                  for game in games
+                    option(value='0') #{game.name}
+                           
           for tr in tournamentLeaderboard
             .row.p-2
               h3 #{tr.name}
