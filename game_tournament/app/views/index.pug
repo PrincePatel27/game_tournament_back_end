@@ -44,10 +44,17 @@ block content
               label.control-label.requiredField(for='propertyType') Select Game
                 span.asteriskField *
               .col-xs-12
+
+              
                 select#propertyType.select.form-control.input-lg(form='addProperty', name='propertyType')
+                
                   option(value='0') --Select --
                   for game in games
-                    option(value='0') #{game.name}
+                    option(value=game.id) #{game.name}
+            .form-group
+              button.btn.btn-primary.fw(type='submit') Update
+                  
+                    
                            
           for tr in tournamentLeaderboard
             .row.p-2
