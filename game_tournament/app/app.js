@@ -1,24 +1,36 @@
 // Import express.js
 const express = require("express");
-
 // Create express app
 var app = express();
-
+const session = require('express-session');
+const path = require('path')
+const bodyParser = require('body-parser');
+app.use(session({
+    secret: 'gametournament',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+app.use(bodyParser.urlencoded({ extended: false }))
 // Add static files location
 app.use(express.static("static"));
 
 // Get the functions in the db.js file to use
 const db = require('./services/db');
+
 // Use the Pug templating engine
+app.use('/views', express.static(path.resolve(__dirname, './views')))
 app.set('view engine', 'pug');
 app.set('views', './app/views');
 
-// Get the game models
+// Get the models
 const { Game } = require("./models/game");
-
-// Get the game models
 const { Tournament } = require("./models/tournament");
 const { Teampoint } = require("./models/teampoint");
+const { User } = require("./models/user");
+
+
+
 
 // Create a route for root - /
 app.get("/", async function(req, res) {
@@ -29,39 +41,75 @@ app.get("/", async function(req, res) {
     const tournamentLeaderboard = await tournament.getTournamentTables();
     console.log(tournamentLeaderboard.length)
     res.render("index",{games,tournaments,tournamentLeaderboard});
+    /*if (req.session.uid) {
+        const game = new Game();
+        var tournament = new Tournament();
+        const tournaments = await tournament.getTournamentName();
+        const games = await game.getGameName();
+        const tournamentLeaderboard = await tournament.getTournamentTables();
+        console.log(tournamentLeaderboard.length)
+        res.render("index", { games, tournaments, tournamentLeaderboard });
+        
+    } else {
+        res.send('Please login to view this page!');
+    }
+    res.end();*/
 
 });
 app.get("/Home", function(req, res) {
-    res.render("index");
-
+    if (req.session.uid) {
+        res.render("index.pug");
+    } else {
+        res.send('Please login to view this page!');
+    }
 });
 app.get("/Profile", function(req, res) {
-    res.render("profile");
+    if (req.session.uid) {
+        res.render("profile.pug");
+    } else {
+        res.send('Please login to view this page!');
+    }
 });
 app.get("/Signup", function(req, res) {
-    res.render("signup");
+    res.render("signup.pug");
 });
 app.get("/Login", function(req, res) {
-    res.render("login");
+    res.render("login.pug");
 });
 
 app.get("/Forgot", function(req, res) {
-    res.render("forget");
+    res.render("forget.pug");
+});
+//registration
+app.post('/signup', async function(req,res){
+    params = req.body;
+    
+    var user =new User();
+    await user.addUser(params);
+    res.render('register-success.pug');
+});
+//login
+app.post('/login', async function (req, res) {
+    params = req.body;
+    var user = new User();
+    const data = await user.login(params);
+    if (data.isAuthorized) {
+        req.session.uid = data.user.id;
+        req.session.loggedIn = true;
+        res.redirect('/');
+    } else {
+        res.send('Email or password is incorrect');
+    }
 });
 
-// Create a route for testing the databse of games
-app.get("/game_table", async function(req, res) {
+// Logout
+app.get('/logout', function (req, res) {
+    req.session.destroy();
+    res.redirect('/login');
 });
 
-// Create a route for testing the databse of games
-app.get("/games1", function(req, res) {
-    // Assumes a table called test_table exists in your database
-    sql = 'select name from games';
-    db.query(sql).then(results => {
-        console.log(results);
-        res.send(results)
-    });
-});
+
+
 
 // Create a route for testing the databse of 
 app.get("/points", function(req, res) {
@@ -82,8 +130,6 @@ app.get("/point_table", function(req, res) {
     });
 });
 
-
-
 // Create a route for testing the databse of games
 app.get("/tournament_table", function(req, res) {
     var tournament=new Tournament();
@@ -101,8 +147,6 @@ app.get("/tournament", function(req, res) {
         res.send(results)
     });
 });
-
-
 
 
 // Create a route for /goodbye
