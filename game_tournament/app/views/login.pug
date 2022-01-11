@@ -1,20 +1,27 @@
-extend header 
-block content 
-    .container-fluid.m-4
-    .row.ml-4   
-        h3 sign in to game tournament 
-    form.mb-2.ml-4
-        .form-group
-        label Username
-        br
-        input.fw(type='email' aria-describedby='emailHelp' placeholder='Enter email')
-        .form-group
-        label Password
-        br
-        input.fw(type='password' placeholder='Password')
-        br
-        a.nav-link(href='Forgot') Forgot Password?
-        br
-        button.btn.btn-primary.fw(type='submit') Sign in 
-        br
-        a.nav-link(href='signup') create an account
+doctype html 
+head 
+  title Game Tournament 
+  // core theme CSS
+  style 
+    include ./css/bootstrap.min.css 
+    include ./css/styles.css 
+
+.container-fluid.m-4
+        .row.ml-4  
+            form(action='/login' method='POST')#login.form.mb-2.ml-4 
+                h3.form_title Game Tournament 
+                .form_input-group
+                    label Email
+                    br
+                    input.form_input(type='text' name='email' value='' placeholder='Email')
+                    .form__input-error-message
+                .form_input-group
+                    label Password
+                    br
+                    input.form__input(type='password' name='password' value='' placeholder='Password')
+                    .form__input-error-message
+                p
+                    a.nav-link(href='Forgot') Forgot Password?
+                button.form__button(type='submit') Login 
+                p 
+                    a.nav-link(href='signup') Create an Account

@@ -15,11 +15,12 @@ head
     button#sidebarToggle.btn.btn-primary MENU
     
         button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
-       
-
+         for game in games 
+           ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+            li.nav-item
+              a.nav-link(href='') #{game.name}   
     .list-group.list-group-flush
-      
-
+       
   // Page content wrapper
   #page-content-wrapper
     // Top navigation 
