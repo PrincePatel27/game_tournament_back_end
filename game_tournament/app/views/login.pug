@@ -1,27 +1,36 @@
 doctype html 
 head 
-  title Game Tournament 
-  // core theme CSS
-  style 
-    include ./css/bootstrap.min.css 
-    include ./css/styles.css 
-
-.container-fluid.m-4
-        .row.ml-4  
-            form(action='/login' method='POST')#login.form.mb-2.ml-4 
-                h3.form_title Game Tournament 
-                .form_input-group
+    style  
+        include ./css/styles.css
+        include ./css/bootstrap.min.css 
+#wrapper.d-flex
+    .container-fluid   
+        // Page content wrapper
+        #page-content-wrapper
+        // Top navigation 
+        nav.navbar.navbar-expand-sm.bg-light
+            ul.navbar-nav.ml-auto
+                li.nav-item
+                    a.nav-link(href='Login') Signin
+                li.nav-item
+                    a.nav-link(href='Signup') Signup
+.container.mt-5
+    .row.d-flex.justify-content-center 
+        form(action='/Login' method='POST')#login.form.mb-2.ml-4 
+            h3.form_title.bg-fade Game Tournament 
+                .form_input-group.mt-2
                     label Email
                     br
                     input.form_input(type='text' name='email' value='' placeholder='Email')
-                    .form__input-error-message
+                    .form_input-error-message
                 .form_input-group
                     label Password
                     br
                     input.form__input(type='password' name='password' value='' placeholder='Password')
-                    .form__input-error-message
+                    .form_input-error-message
                 p
                     a.nav-link(href='Forgot') Forgot Password?
-                button.form__button(type='submit') Login 
+                button.form_button(type='submit') Login 
                 p 
                     a.nav-link(href='signup') Create an Account
+    script(src='views/js/main.js')

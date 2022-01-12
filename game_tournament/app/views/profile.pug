@@ -1,23 +1,22 @@
 extend header 
 block content 
-    .container-fluid.m-4
-    .row.ml-4   
-        h3 Profile 
-    form.mb-2.ml-4
-        .form-group
-        label Username
-        br
-        input.fw(type='text' aria-describedby='emailHelp' placeholder='Username')
-        .form-group
-        label Email address 
-        br
-        input.fw(type='email' placeholder='email')
-        br
-        .form-group
-        label Date of birth 
-        br
-        input.fw(type='Date' placeholder='DOB')
-        br
-        .form-group
-        button.btn.btn-primary.fw(type='submit') Update 
-        a.nav-link(href='Forgot') Change Password  
+    .container.mt-5.bg-light
+        .row.ml-4   
+            h3 Profile 
+        form(action='/changeProfile' method='POST')
+            .form_input-group.mt-2
+                label Username
+                br
+                input.form_input(type='text' name='username' value=userId.username)
+            .form_input-group.mt-2
+                label Email
+                br
+                input#staticsignupemail.form_input(type='email'  placeholder= userId.email readonly='')
+                br
+            .form_input-group
+                label Date of birth 
+                br
+                input.form_input(type='text' name='date_of_birth' value=userId.date_of_birth)
+                br
+            .form_input-group
+                button.btn.btn-primary.form_input(type='submit') Update 

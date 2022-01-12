@@ -43,6 +43,13 @@ class User {
         this.id = result.insertId;
         return true;
     }
+    //edit profile
+    async changeProfile(data, id) {
+        var sql = `UPDATE users SET username= '${data.username}',date_of_birth ='${data.date_of_birth}'
+        WHERE id = ${id}`;
+        const result = await db.query(sql);
+        return result;
+    }
 
     async login(data) {
         var sql = "SELECT * FROM users WHERE email = ?";

@@ -1,6 +1,6 @@
 extend header 
 block content       
-  .container.mt-3
+  .container-fluid 
     .row.mt-2 
         .col-md-12 
          ul.nav.nav-tabs
@@ -9,11 +9,10 @@ block content
             li.nav-item
               a.nav-link(href='#Matches') Matches
             li.nav-item
-              a.nav-link(href='#Pointtable') Point Table
-              
+              a.nav-link(href='#Pointtable') Point Table             
     .tab-content
-        #Tournament.container.tan-pane.fade.show.active
-          table.table
+      #Tournament.container.tab-pane.fade.show.active.mt-2.bg-light
+          table.table.table-striped
             thead
               tr
                 th(scope='col') #
@@ -33,29 +32,10 @@ block content
                   td #{tournament.time}
                   td #{tournament.status}
                   td #{tournament.venue}
-        
-        #Matches.container.tab-pane.fade
+      #Matches.container.tab-pane.fade.mt-2.bg-light
           h3 Menu 1
           p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        #Pointtable.container.tab-pane.fade
-          .row
-          .col-sm-6
-            .form-group
-              label.control-label.requiredField(for='propertyType') Select Game
-                span.asteriskField *
-              .col-xs-12
-
-              
-                select#propertyType.select.form-control.input-lg(form='addProperty', name='propertyType')
-                
-                  option(value='0') --Select --
-                  for game in games
-                    option(value=game.id) #{game.name}
-            .form-group
-              button.btn.btn-primary.fw(type='submit') Update
-                  
-                    
-                           
+      #Pointtable.container.tab-pane.fade.mt-2.bg-light
           for tr in tournamentLeaderboard
             .row.p-2
               h3 #{tr.name}
@@ -73,7 +53,8 @@ block content
                         td #{ld.teamName}
                         td #{ld.point}
               else 
-                p No tournament found      
+                p 
+                | No tournament found        
   script.
     $(document).ready(function(){
     $(".nav-tabs a").click(function(){
