@@ -1,42 +1,54 @@
-block content 
-    doctype html
-    head
-        link(rel='stylesheet' href='views/css/main.css')
-    .container-fluid.m-4
-        .row.ml-4   
-            form(action='/signup' method='POST')#createAccount.form.mb-2.ml-4
-                h1.form_title Create Account
-                .form_input-group
-                    label Username
-                    br
-                    input#signupUsername.form_input(type='text' value='' name='username' placeholder='Username')
-                    .form_input-error-message
-                .form_input-group
-                    br
-                    label Email address 
-                    br
-                    input.form_input(type='text' id='First Name' value='' name='email' placeholder='Email')
-                    .form_input-error-message
-                .form_input-group
-                    br
-                    label Date of birth 
-                    br
-                    input.form_input(type='date' id='date_of_birth' value='' name='date_of_birth' placeholder='Date of birth')
-                    .form_input-error-message
-                .form_input-group
-                    br
-                    label Password 
-                    br
-                    input.form_input(type='password' name='password' value='' placeholder='Password')
-                    .form_input-error-message
-                .form_input-group
-                    br
-                    label Confirm Password 
-                    br
-                    input.form_input(type='password' name='confirmPassword' value='' placeholder='Confirm password')
-                    .form_input-error-message
-                    br
-                button.form_button(type='submit') Register
-                p
-                    a#linkLogin.form_link(href='/login') Already have an account? Sign in
-        script(src='views/js/main.js')
+doctype html
+head
+    style 
+        include ./css/styles.css 
+        include ./css/bootstrap.min.css
+#wrapper.d-flex
+    .container-fluid   
+        // Page content wrapper
+        #page-content-wrapper
+        // Top navigation 
+        nav.navbar.navbar-expand-sm.bg-light
+            ul.navbar-nav.ml-auto
+                li.nav-item
+                    a.nav-link(href='Login') Signin
+                li.nav-item
+                    a.nav-link(href='Signup') Signup  
+.container-fluid.mt-5
+    .row.d-flex.justify-content-center   
+        form(action='/signup' method='POST')#createAccount.form.mb-2.ml-4
+            h1.form_title Create Account
+            .form_input-group.mt-2
+                label Username
+                br
+                input#signupUsername.form_input(type='text' value='' name='username' placeholder='Username')
+                .form_input-error-message
+            .form_input-group
+                br
+                label Email address 
+                br
+                input.form_input(type='text' id='First Name' value='' name='email' placeholder='Email')
+                .form_input-error-message
+            .form_input-group
+                br
+                label Date of birth 
+                br
+                input.form_input(type='date' id='date_of_birth' value='' name='date_of_birth' placeholder='Date of birth')
+                .form_input-error-message
+            .form_input-group
+                br
+                label Password 
+                br
+                input.form_input(type='password' name='password' value='' placeholder='Password')
+                .form_input-error-message
+            .form_input-group
+                br
+                label Confirm Password 
+                br
+                input.form_input(type='password' name='confirmPassword' value='' placeholder='Confirm password')
+                .form_input-error-message
+                br
+            button.form_button(type='submit') Register
+            p
+                a.nav-link(href='Login') Already have an account? Sign in
+    script(src='views/js/main.js')

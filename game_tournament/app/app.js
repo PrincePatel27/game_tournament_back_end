@@ -30,18 +30,16 @@ const { Teampoint } = require("./models/teampoint");
 const { User } = require("./models/user");
 
 
-
-
 // Create a route for root - /
 app.get("/", async function(req, res) {
-    const game = new Game();
+    /*const game = new Game();
     var tournament=new Tournament();
     const tournaments = await tournament.getTournamentName();
     const games = await game.getGameName();
     const tournamentLeaderboard = await tournament.getTournamentTables();
     console.log(tournamentLeaderboard.length)
-    res.render("index",{games,tournaments,tournamentLeaderboard});
-    /*if (req.session.uid) {
+    res.render("index",{games,tournaments,tournamentLeaderboard});*/
+    if (req.session.uid) {
         const game = new Game();
         var tournament = new Tournament();
         const tournaments = await tournament.getTournamentName();
@@ -53,19 +51,12 @@ app.get("/", async function(req, res) {
     } else {
         res.send('Please login to view this page!');
     }
-    res.end();*/
+    res.end();
 
 });
 app.get("/Home", function(req, res) {
     if (req.session.uid) {
         res.render("index.pug");
-    } else {
-        res.send('Please login to view this page!');
-    }
-});
-app.get("/Profile", function(req, res) {
-    if (req.session.uid) {
-        res.render("profile.pug");
     } else {
         res.send('Please login to view this page!');
     }
@@ -77,13 +68,41 @@ app.get("/Login", function(req, res) {
     res.render("login.pug");
 });
 
-app.get("/Forgot", function(req, res) {
-    res.render("forget.pug");
+app.get("/Forgot", async function(req, res) {
+    const game = new Game();
+    const games = await game.getGameName();
+    res.render("forget.pug",{games});
 });
+app.get("/profile", async function (req, res) {
+    if (req.session.uid) {
+        const game = new Game();
+        const games = await game.getGameName();
+        const userId = req.session.uid;
+        const user = new User();
+        //const userDetail = await user.getUserDetail(userId);
+        res.render('profile.pug', { userId, games });
+    } else {
+        res.render("requireLogin");
+    }
+});
+//edit profile
+app.post("/changeProfile", async function (req, res) {
+   // if (req.session.uid) {
+        params = req.body;
+        var user = new User();
+        const profileInsert = await user.changeProfile(params, req.session.uid.id);
+        if (profileInsert) {
+            res.redirect('/');
+        }
+    //} else {
+       // res.render("requireLogin");
+   // }
+});
+
+
 //registration
 app.post('/signup', async function(req,res){
     params = req.body;
-    
     var user =new User();
     await user.addUser(params);
     res.render('register-success.pug');
@@ -94,7 +113,8 @@ app.post('/login', async function (req, res) {
     var user = new User();
     const data = await user.login(params);
     if (data.isAuthorized) {
-        req.session.uid = data.user.id;
+       
+        req.session.uid = data.user;
         req.session.loggedIn = true;
         res.redirect('/');
     } else {
